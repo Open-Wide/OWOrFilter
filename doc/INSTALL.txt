@@ -1,0 +1,57 @@
+-------------------------
+owORFilter :
+-------------------------
+owObjectRelationsFilter (owORFilter) provides an extended attribute filter for "Object relation" and "Object relations" datatypes.
+This filter supports basic logical operators.
+This will work with single relations as well as multiple.
+
+
+-------------------------
+Author
+-------------------------
+Simon Boyer, from a good work of Bertrand Dunogier and Grégory Becue (thanks) : http://projects.ez.no/enhanced_object_relation_filter
+
+
+-------------------------
+Installation instructions
+-------------------------
+
+1) If it does not exist, create a directory named "extension" in the base ezpublish directory.
+
+
+2) Unpack the ZIP file and copy the directory "oworfilter" to the extension directory.
+
+
+3) Activate extension :
+---------------------------------
+Add the following to your settings/override/site.ini.append.php file:
+[ExtensionSettings]
+ActiveExtensions[]=oworfilter
+
+	OR
+
+In administrator user interface, click 'setup' tab->'extensions' menu, select 'oworfilter', click button 'Apply Changes'
+
+
+
+4) Regenerate autoloads :
+---------------------------------
+In administrator user interface, click 'setup' tab->'extensions' menu, click button 'Regenerate autoload arrays for extensions'
+
+	OR
+	
+in eZ Publish installation folder, run "php bin/php/ezpgenerateautoloads.php -e"
+
+
+
+5) Clear cache
+---------------------------------
+Clear INI and template caches. (from admin 'Setup' tab or commandline)
+
+
+
+---------------------------------------------
+Hope you find it useful! 
+
+Simon Boyer
+
