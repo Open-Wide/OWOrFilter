@@ -1,11 +1,9 @@
+owOrFilter :
 -------------------------
-owORFilter :
--------------------------
-owObjectRelationsFilter (owORFilter) provides an extended attribute filter for "Object relation" and "Object relations" datatypes.
+OWOrFilter (for OpenWide Object Relations Filter) provides an extended attribute filter for "Object relation" and "Object relations" datatypes.
 This filter supports basic logical operators.
 This will work with single relations as well as multiple.
 
--------------------------
 Usage
 -------------------------
 
@@ -13,7 +11,9 @@ This filter is used like any extended attribute filter, as explained on the
 documentation for the content/list fetch function:
 http://doc.ez.no/eZ-Publish/Technical-manual/4.x/Reference/Modules/content/Fetch-functions/list
 
+---------------------------------------------
 Examples :
+---------------------------------------------
 
 Single object_id, single attribute :
 ---------------------------------------------
