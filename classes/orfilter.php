@@ -96,16 +96,24 @@ function CreateSqlParts( $params )
         else
         {
             $objectId = $param[1];
+            $trans = eZCharTransform::instance();
+            $attribute = $trans->transformByGroup( $param[0], 'identifier' );                
+            $tableLinkName = 'orfilter_link'. $attribute;
+            $tables[] = 'ezcontentobject_link ' . $tableLinkName;
+            $joins[]  = $tableLinkName . '.from_contentobject_id = ezcontentobject.id';
+            $joins[]  = $tableLinkName . '.from_contentobject_version = ezcontentobject.current_version';
+            $joins[]  = $tableLinkName . '.contentclassattribute_id = ' . $classAttributeId;
+            if( is_numeric( $param[1] ) ) {
+                $joins[]  = $tableLinkName . '.to_contentobject_id = ' . $objectId;
+            }else {
+                $tableAttributeName = 'orfilter_attribute'. $attribute;
+                $tables[] = 'ezcontentobject_attribute ' . $tableAttributeName;
+                $joins[]  = $tableAttributeName . '.contentobject_id = ' . $tableLinkName . '.to_contentobject_id';
+                $joins[]  = $tableAttributeName . '.data_text = "' . $objectId .'"';
 
-            $tableName = 'orfilter_link'. $objectId;
-            $tables[] = 'ezcontentobject_link ' . $tableName;
-
-            $joins[]  = $tableName . '.from_contentobject_id = ezcontentobject.id';
-            $joins[]  = $tableName . '.from_contentobject_version = ezcontentobject.current_version';
-            $joins[]  = $tableName . '.contentclassattribute_id = ' . $classAttributeId;
-            $joins[]  = $tableName . '.to_contentobject_id = ' . $objectId;
+            }
         }
-		$joinsResult[] =  "(\n".implode( " AND\n ", $joins ) . "\n)\n\n";
+        $joinsResult[] =  "(\n".implode( " AND\n ", $joins ) . "\n)\n\n";
 
     }
 
@@ -119,7 +127,7 @@ function CreateSqlParts( $params )
       $tables = "\n, "    . implode( "\n, ", $tables );
       $joinsResult =  "(\n".implode( " $mode\n ", $joinsResult ) . "\n) AND\n ";
     }
-    
+
     return array( 'tables' => $tables, 'joins' => $joinsResult );
   }
   
